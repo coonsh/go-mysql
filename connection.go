@@ -302,6 +302,10 @@ func (mc *MySQLConn) interpolateParams(query string, args []driver.Value) (strin
 	return string(buf), nil
 }
 
+func (mc *MySQLConn) NoBackslashEscapes() bool {
+	return mc.status&StatusNoBackslashEscapes != 0
+}
+
 func (mc *MySQLConn) Exec(query string, args []driver.Value) (driver.Result, error) {
 	if mc.closed.IsSet() {
 		errLog.Print(ErrInvalidConn)
