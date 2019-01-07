@@ -229,7 +229,7 @@ func encryptPassword(password string, seed []byte, pub *rsa.PublicKey) ([]byte, 
 	return rsa.EncryptOAEP(sha1, rand.Reader, pub, plain, nil)
 }
 
-func (mc *mysqlConn) sendEncryptedPassword(seed []byte, pub *rsa.PublicKey) error {
+func (mc *MySQLConn) sendEncryptedPassword(seed []byte, pub *rsa.PublicKey) error {
 	enc, err := encryptPassword(mc.cfg.Passwd, seed, pub)
 	if err != nil {
 		return err
@@ -237,7 +237,7 @@ func (mc *mysqlConn) sendEncryptedPassword(seed []byte, pub *rsa.PublicKey) erro
 	return mc.writeAuthSwitchPacket(enc)
 }
 
-func (mc *mysqlConn) auth(authData []byte, plugin string) ([]byte, error) {
+func (mc *MySQLConn) auth(authData []byte, plugin string) ([]byte, error) {
 	switch plugin {
 	case "caching_sha2_password":
 		authResp := scrambleSHA256Password(authData, mc.cfg.Passwd)
@@ -295,7 +295,7 @@ func (mc *mysqlConn) auth(authData []byte, plugin string) ([]byte, error) {
 	}
 }
 
-func (mc *mysqlConn) handleAuthResult(oldAuthData []byte, plugin string) error {
+func (mc *MySQLConn) handleAuthResult(oldAuthData []byte, plugin string) error {
 	// Read Result Packet
 	authData, newPlugin, err := mc.readAuthResult()
 	if err != nil {

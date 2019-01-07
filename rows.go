@@ -22,7 +22,7 @@ type resultSet struct {
 }
 
 type mysqlRows struct {
-	mc     *mysqlConn
+	mc     *MySQLConn
 	rs     resultSet
 	finish func()
 }
@@ -129,7 +129,7 @@ func (rows *mysqlRows) HasNextResultSet() (b bool) {
 	if rows.mc == nil {
 		return false
 	}
-	return rows.mc.status&statusMoreResultsExists != 0
+	return rows.mc.status&StatusMoreResultsExists != 0
 }
 
 func (rows *mysqlRows) nextResultSet() (int, error) {

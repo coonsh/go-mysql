@@ -147,24 +147,24 @@ const (
 )
 
 // http://dev.mysql.com/doc/internals/en/status-flags.html
-type statusFlag uint16
+type StatusFlag uint16
 
 const (
-	statusInTrans statusFlag = 1 << iota
-	statusInAutocommit
-	statusReserved // Not in documentation
-	statusMoreResultsExists
-	statusNoGoodIndexUsed
-	statusNoIndexUsed
-	statusCursorExists
-	statusLastRowSent
-	statusDbDropped
-	statusNoBackslashEscapes
-	statusMetadataChanged
-	statusQueryWasSlow
-	statusPsOutParams
-	statusInTransReadonly
-	statusSessionStateChanged
+	StatusInTrans StatusFlag = 1 << iota
+	StatusInAutocommit
+	StatusReserved // Not in documentation
+	StatusMoreResultsExists
+	StatusNoGoodIndexUsed
+	StatusNoIndexUsed
+	StatusCursorExists
+	StatusLastRowSent
+	StatusDbDropped
+	StatusNoBackslashEscapes
+	StatusMetadataChanged
+	StatusQueryWasSlow
+	StatusPsOutParams
+	StatusInTransReadonly
+	StatusSessionStateChanged
 )
 
 const (

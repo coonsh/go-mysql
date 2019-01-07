@@ -105,7 +105,7 @@ Changes:
  - The DSN parser also checks for a missing separating slash
  - Faster binary date / datetime to string formatting
  - Also exported the MySQLWarning type
- - mysqlConn.Close returns the first error encountered instead of ignoring all errors
+ - MySQLConn.Close returns the first error encountered instead of ignoring all errors
  - writePacket() automatically writes the packet size to the header
  - readPacket() uses an iterative approach instead of the recursive approach to merge splitted packets
 

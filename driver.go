@@ -17,7 +17,6 @@
 package mysql
 
 import (
-	"database/sql"
 	"database/sql/driver"
 	"net"
 	"sync"
@@ -51,11 +50,11 @@ func RegisterDial(net string, dial DialFunc) {
 // Open new Connection.
 // See https://github.com/go-sql-driver/mysql#dsn-data-source-name for how
 // the DSN string is formatted
-func (d MySQLDriver) Open(dsn string) (driver.Conn, error) {
+func (d MySQLDriver) Open(dsn string) (*MySQLConn, error) {
 	var err error
 
-	// New mysqlConn
-	mc := &mysqlConn{
+	// New MySQLConn
+	mc := &MySQLConn{
 		maxAllowedPacket: maxPacketSize,
 		maxWriteSize:     maxPacketSize - 1,
 		closech:          make(chan struct{}),
@@ -162,8 +161,4 @@ func (d MySQLDriver) Open(dsn string) (driver.Conn, error) {
 	}
 
 	return mc, nil
-}
-
-func init() {
-	sql.Register("mysql", &MySQLDriver{})
 }
